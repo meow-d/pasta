@@ -35,6 +35,9 @@ async def dice(ctx,faces):
 @bot.command(help='when you\'re too lazy to even copy and paste')
 async def pasta(ctx,pastaName):
     pastaDict = csv.DictReader(open('pasta.csv', mode='r'))
+    if pastaName == list:
+        for row  in pastaDict:
+            await ctx.send(row[pastaName])
     for row in pastaDict:
         await ctx.send(row[pastaName])
 
