@@ -3,6 +3,12 @@ from discord.ext import commands
 import random
 
 import csv
+# filter function for meow pasta list
+def filterFunc(x):
+    if x == "pastaName":
+        return False
+    else:
+        return True
 
 # TODO error handling, echo last message
 
@@ -36,13 +42,13 @@ async def dice(ctx,faces):
 async def pasta(ctx,pastaName):
     pastaDict = csv.DictReader(open('pasta.csv', mode='r'))
     if pastaName == list:
-        for row  in pastaDict:
+        await ctx.send('\n'.join(filter(filterFunc,pasta.fieldnames)))
+    else:
+        for row in pastaDict:
             await ctx.send(row[pastaName])
-    for row in pastaDict:
-        await ctx.send(row[pastaName])
 
 @bot.command(help='nut')
-async def emoji(ctx):
+async def emoji(ctx): 
     await ctx.send("<:Pokimane:761513674056794112> <:lmao:761792146571264050> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015>")
 
 bot.run('NzYxNzcyNzQzNTQ0Nzk5MjUy.X3feJw.TIuokEm9mRCdVVBQmHOaTGhaLBI')
