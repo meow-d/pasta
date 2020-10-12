@@ -2,6 +2,7 @@ from discord.ext import commands
 import discord
 
 import random
+import time
 
 import csv
 # filter function for meow pasta list
@@ -30,12 +31,12 @@ async def echo(ctx, arg):
     await ctx.send(arg)
 '''
 
-@bot.command(help='echoooooo ᴇᴄʜᴏᴏᴏᴏᴏᴏ ᵉᶜʰᵒᵒᵒᵒᵒᵒ')
-async def echo(ctx,*,text):
+@bot.command(help='aaaaa')
+async def say(ctx,*,text):
     await ctx.send(str(text))
 
-@bot.command(help='repeat the last message')
-async def copycat(ctx):
+@bot.command(help='echoooooo ᴇᴄʜᴏᴏᴏᴏᴏᴏ ᵉᶜʰᵒᵒᵒᵒᵒᵒ')
+async def echo(ctx):
     LastMessage = await ctx.history(limit=1, before=ctx.message).flatten()
     await ctx.send(LastMessage[0].content)
 
@@ -62,5 +63,9 @@ async def pasta(ctx,pastaName):
 @bot.command(help='nut')
 async def emoji(ctx): 
     await ctx.send("<:Pokimane:761513674056794112> <:lmao:761792146571264050> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015>")
+
+@bot.command()
+async def join():
+    pass
 
 bot.run('NzYxNzcyNzQzNTQ0Nzk5MjUy.X3feJw.TIuokEm9mRCdVVBQmHOaTGhaLBI')
