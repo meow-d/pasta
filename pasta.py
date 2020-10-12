@@ -1,4 +1,5 @@
 from discord.ext import commands
+import discord
 
 import random
 
@@ -22,30 +23,41 @@ bot = commands.Bot(command_prefix='meow ')
 async def on_ready():
     print('connected to Discord as ' + bot.user.name)
 
-# templete
-#@bot.command(help='')
-#async def echo(ctx, arg):
-#    await ctx.send(arg)
+# template
+'''
+@bot.command(help='')
+async def echo(ctx, arg):
+    await ctx.send(arg)
+'''
 
 @bot.command(help='echoooooo ᴇᴄʜᴏᴏᴏᴏᴏᴏ ᵉᶜʰᵒᵒᵒᵒᵒᵒ')
 async def echo(ctx,*,text):
     await ctx.send(str(text))
 
+@bot.command(help='repeat the last message')
+async def copycat(ctx):
+    LastMessage = await ctx.history(limit=1, before=ctx.message).flatten()
+    await ctx.send(LastMessage[0].content)
+
 @bot.command(help='owo i\'ll roll a dice for you')
 async def dice(ctx,faces):
     if faces == "":
-        await ctx.send("you rolled a " + str(random.randrange(1,6,1)))
-    else:
-        await ctx.send("you rolled a " + str(random.randrange(1,int(faces),1)))
+        faces = 6   
+    await ctx.send("you rolled a " + str(random.randrange(1,int(faces),1)))
 
 @bot.command(help='when you\'re too lazy to even copy and paste')
 async def pasta(ctx,pastaName):
-    pastaDict = csv.DictReader(open('pasta.csv', mode='r'))
-    if pastaName == list:
-        await ctx.send('\n'.join(filter(filterFunc,pasta.fieldnames)))
+    pastaCSV = csv.DictReader(open('pasta.csv', mode='r'))
+    if pastaName == "list":
+        embedText = discord.Embed(title='title', description='\n'.join(filter(filterFunc,pastaCSV.fieldnames)))
+        await ctx.send(embed = embedText)
     else:
-        for row in pastaDict:
-            await ctx.send(row[pastaName])
+        try:
+            for row in pastaCSV:
+                pastaContent = (row[pastaName])
+        except:
+            pastaContent = (f"sorry i can't find {pastaName}")
+        await ctx.send(pastaContent)
 
 @bot.command(help='nut')
 async def emoji(ctx): 
