@@ -3,5 +3,3 @@ discord.py
 flask
 PyNaCl
 dnspython
-time
-random
