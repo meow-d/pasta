@@ -1,8 +1,11 @@
 from discord.ext import commands
 import discord
+from discord.utils import get
+#from discord import FFmpegPCMAudio
 
 import random
 import time
+from youtube_dl import YoutubeDL
 
 import csv
 # filter function for meow pasta list
@@ -12,7 +15,7 @@ def filterFunc(x):
     else:
         return True
 
-# TODO error handling, echo last message
+# TODO error handling
 
 # import logging
 #logging.basicConfig(level=logging.INFO)
@@ -65,7 +68,19 @@ async def emoji(ctx):
     await ctx.send("<:Pokimane:761513674056794112> <:lmao:761792146571264050> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015>")
 
 @bot.command()
-async def join():
-    pass
+async def join(ctx,link):
+    YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist':'True'}
+    FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
+    voice = get(bot.voice_clients, guild=ctx.guild)
+
+    if not voice.is_playing():
+        with YoutubeDL(YDL_OPTIONS) as ydl:
+            info = ydl.extract_info(link, download=False)
+        URL = info['formats'][0]['url']
+        voice.play(discord.FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
+        voice.is_playing()
+    else:
+        await ctx.send("Already playing song")
+        return
 
 bot.run('NzYxNzcyNzQzNTQ0Nzk5MjUy.X3feJw.TIuokEm9mRCdVVBQmHOaTGhaLBI')
