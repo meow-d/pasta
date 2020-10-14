@@ -50,6 +50,10 @@ async def dice(ctx,faces):
         faces = 6   
     await ctx.send("you rolled a " + str(random.randrange(1,int(faces),1)))
 
+pastaHelp = '''
+when you\'re too lazy to even copy and paste
+use \'meow pasta list\' to list all
+'''
 @bot.command(help='when you\'re too lazy to even copy and paste')
 async def pasta(ctx,pastaName):
     pastaCSV = csv.DictReader(open('pasta.csv', mode='r'))
@@ -69,7 +73,7 @@ async def emoji(ctx):
     await ctx.send("<:Pokimane:761513674056794112> <:lmao:761792146571264050> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015> <a:dancin:762655521730986015>")
 
 @bot.command()
-async def join(ctx,link):
+async def play(ctx,link):
     YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist':'True'}
     FFMPEG_OPTIONS = {'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', 'options': '-vn'}
     voice = get(bot.voice_clients, guild=ctx.guild)
@@ -85,4 +89,4 @@ async def join(ctx,link):
         return
 
 bot.run('NzYxNzcyNzQzNTQ0Nzk5MjUy.X3feJw.TIuokEm9mRCdVVBQmHOaTGhaLBI')
-keep_alive()
+keep_alive.keep_alive()
