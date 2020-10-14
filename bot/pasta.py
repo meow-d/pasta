@@ -85,3 +85,4 @@ async def join(ctx,link):
         return
 
 bot.run('NzYxNzcyNzQzNTQ0Nzk5MjUy.X3feJw.TIuokEm9mRCdVVBQmHOaTGhaLBI')
+keep_alive()
