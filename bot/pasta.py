@@ -6,6 +6,7 @@ from discord.utils import get
 import random
 import time
 from youtube_dl import YoutubeDL
+import keep_alive
 
 import csv
 # filter function for meow pasta list
