@@ -9,7 +9,7 @@ from youtube_dl import YoutubeDL
 import keep_alive
 
 import csv
-# filter function for meow pasta list
+# filter function for meow pastalist
 def filterFunc(x):
     if x == "pastaName":
         return False
@@ -26,7 +26,7 @@ bot = commands.Bot(command_prefix='meow ', case_insensitive=True)
 
 @bot.event
 async def on_ready():
-    print('connected to Discord as ' + bot.user.name)
+    print('\nconnected to Discord as ' + bot.user.name + '\n')
 
 # template
 '''
@@ -35,7 +35,7 @@ async def name(ctx, arg):
     await ctx.send(arg)
 '''
 
-@bot.command(help='pong')
+@bot.command(help='ping pong ping pong ping ping pong')
 async def ping(ctx):
     await ctx.send('pong')
 
@@ -60,21 +60,22 @@ async def dice(ctx,faces):
 
 @bot.command(help='when you\'re too lazy to even copy and paste')
 async def pasta(ctx,*,pastaName):
-    pastaCSV = csv.DictReader(open('pasta.csv', mode='r'))
+    pastaCSV = csv.DictReader(open('bot/pasta.csv', mode='r'))
     try:
         for row in pastaCSV:
             pastaContent = (row[pastaName])
             await ctx.send(pastaContent)
     except:
-        message = await ctx.send(f"sorry i can't find {pastaName}")
-        await message.delete()
+        embed_pastaError = discord.Embed(description=f"sorry i can't find {pastaName}")
+        message = await ctx.send(embed = embed_pastaError)
+        await message.delete(3)
 
 
 @bot.command(help='list of pasta(s)')
 async def pastalist(ctx):
-    pastaCSV = csv.DictReader(open('pasta.csv', mode='r'))
-    embedText = discord.Embed(description='\n'.join(filter(filterFunc,pastaCSV.fieldnames)))
-    await ctx.send(embed = embedText)
+    pastaCSV = csv.DictReader(open('bot/pasta.csv', mode='r'))
+    embed_pastaList = discord.Embed(description='\n'.join(filter(filterFunc,pastaCSV.fieldnames)))
+    await ctx.send(embed = embed_pastaList)
 
 
 @bot.command(help='nut')
