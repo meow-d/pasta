@@ -1,4 +1,9 @@
 {
     "python.pythonPath": "/usr/bin/python",
-    "python.autoComplete.extraPaths": ["/home/purecatprsn/stufff/pasta/bot/"],
+    "python.autoComplete.extraPaths": [
+        "/home/purecatprsn/stufff/pasta/bot/"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/purecatprsn/stufff/pasta/bot/"
+    ],
 }
