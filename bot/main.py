@@ -72,7 +72,7 @@ async def dice(ctx, faces=6):
 @bot.command(help="when you're too lazy to even copy and paste")
 async def pasta(ctx, *, pastaName):
 
-    pastaCSV = csv.DictReader(open("bot/pasta.csv", mode="r"))
+    pastaCSV = csv.DictReader(open("pasta.csv", mode="r"))
     try:
         for row in pastaCSV:
             pastaContent = row[pastaName]
@@ -86,7 +86,7 @@ async def pasta(ctx, *, pastaName):
 @bot.command(help="list of cpoypastas", aliases=["pl"])
 async def pastalist(ctx):
 
-    pastaCSV = csv.DictReader(open("bot/pasta.csv", mode="r"))
+    pastaCSV = csv.DictReader(open("pasta.csv", mode="r"))
     pastaNameList = "\n".join(pastaCSV.fieldnames[1:])
     embed_pastaList = discord.Embed(description=pastaNameList)
     await ctx.send(embed=embed_pastaList)
